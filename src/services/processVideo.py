@@ -16,8 +16,6 @@ from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
 logger = setup_logger("processVideoService")
-url = 'https://www.youtube.com/watch?v=GC80Dk7eg_A'
-
 
 def convertVideotoAudio(videoPath, audioFilename):
     # Construct the ffmpeg command
@@ -33,10 +31,10 @@ def convertVideotoAudio(videoPath, audioFilename):
     return True
 
 
-def processVideo():
+def processVideo(url):
 
     absDownloadVideoPath = downloadYoutubeVideo(url)
-
+    print(absDownloadVideoPath)
     videoName = os.path.splitext(os.path.basename(absDownloadVideoPath))[0]
 
     audioFilename = f"{videoName}.mp3"
@@ -48,10 +46,12 @@ def processVideo():
     conversionResult = convertVideotoAudio(absDownloadVideoPath, audioFilepath)
 
     contentInText = audioToText(audioFilepath)
+    logger.info("starting to summerize content")
+    summerizeContentIntext = summerizeContent(contentInText)
     
-    summerizeContent = summerizeContent(contentInText)
+    print(summerizeContentIntext)
     
-    print(summerizeContent)
+    return summerizeContentIntext
 
 
 def audioToText(audioFilePath):
@@ -76,3 +76,7 @@ def summerizeContent(content):
 
     summerizeContent = chat(messages)
     print(summerizeContent)
+    return summerizeContent
+
+def TestUI(content):
+    print(content)

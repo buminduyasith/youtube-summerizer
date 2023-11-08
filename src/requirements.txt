@@ -2,3 +2,4 @@ python-dotenv
 pytube
 whisper
 langchain
+streamlit

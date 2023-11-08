@@ -1,11 +1,16 @@
-from services.processVideo import summerizeContent
+from services.processVideo import processVideo
+import streamlit as st
 
 
-summerizeContent("""In short, scrum is a framework for effective collaborations among teams working on complex products. Scrum is a type of agile technology that consists of meetings, roles, and tools to help teams working on complex projects collaborate and better structure and manage their workload. Although it is most often used by software development teams, scrum can be beneficial to any team working toward a common goal.
+st.title("Educational Video Summarizer App")
 
-Who can benefit from scrum?
-While scrum can be useful for a wide variety of businesses and projects, these are the most likely beneficiaries:
+youtube_link = st.text_input("Enter a YouTube link:")
 
-Complicated projects: Scrum methodology is ideal for projects that require teams to complete a backlog. Scrum breaks down each process into bite-sized chunks that can make a complex project easier.
-Companies that value results: Scrum is also beneficial to companies that value results over the documented progress of the process. This is because scrum is focused on efficiency and innovation to drive results, rather than a detailed, rigid process.
-Companies that cater to customers: Scrum can help companies that develop products in accordance with customer preferences and specifications. Scrum is adaptable to change, making it key when responding to customer requests. """)
+if st.button("Submit"):
+    if youtube_link:
+        x = processVideo(youtube_link)
+        st.markdown(f"[Click here to open the video]({youtube_link})")
+        st.markdown(x)
+        
+    else:
+        st.warning("Please enter a valid YouTube link.")
