@@ -1,49 +1,11 @@
-from services.videoDownloadService import downloadYoutubeVideo
-import subprocess
-import os
-from services.loggerServices import setup_logger
-import whisper
-
-logger = setup_logger("processVideoService")
-url = 'https://www.youtube.com/watch?v=GC80Dk7eg_A'
+from services.processVideo import summerizeContent
 
 
-def convertVideotoAudio(videoPath, audioFilename):
-        # Construct the ffmpeg command
-    command = [
-        'ffmpeg',
-        '-i', videoPath,
-        audioFilename
-    ]
+summerizeContent("""In short, scrum is a framework for effective collaborations among teams working on complex products. Scrum is a type of agile technology that consists of meetings, roles, and tools to help teams working on complex projects collaborate and better structure and manage their workload. Although it is most often used by software development teams, scrum can be beneficial to any team working toward a common goal.
 
-        # Run the command
-    subprocess.run(command, check=True)
-    logger.info("Conversion successful.")
-    return True
+Who can benefit from scrum?
+While scrum can be useful for a wide variety of businesses and projects, these are the most likely beneficiaries:
 
-
-def processVideo():
-    
-    absDownloadVideoPath = downloadYoutubeVideo(url)
-        
-        # Get the video file name without extension
-    videoName = os.path.splitext(os.path.basename(absDownloadVideoPath))[0]
-            # Create the audio filename with .mp3 extension
-    audioFilename = f"{videoName}.mp3"
-            
-            # Get the directory where the video is located
-    video_directory = os.path.dirname(absDownloadVideoPath)
-            
-            # Construct the full audio filepath
-    audioFilepath = os.path.join(video_directory, audioFilename)
-
-    conversionResult = convertVideotoAudio(absDownloadVideoPath, audioFilepath)
-    
-processVideo();
-
-
-
-def createSubtitles(audioFilePath):
-    model = whisper.load_model("base")
-    result = model.transcribe(audioFilePath)
-    return (result["text"])
+Complicated projects: Scrum methodology is ideal for projects that require teams to complete a backlog. Scrum breaks down each process into bite-sized chunks that can make a complex project easier.
+Companies that value results: Scrum is also beneficial to companies that value results over the documented progress of the process. This is because scrum is focused on efficiency and innovation to drive results, rather than a detailed, rigid process.
+Companies that cater to customers: Scrum can help companies that develop products in accordance with customer preferences and specifications. Scrum is adaptable to change, making it key when responding to customer requests. """)
