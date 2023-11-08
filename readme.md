@@ -31,3 +31,4 @@ To use this app, follow these steps:
 4. **Question Generation:**
    - Generate practice questions from the summarized text to test your understanding of the learning material.
 
+![image](https://github.com/buminduyasith/youtube-summerizer/assets/58271753/99441a83-3365-46d8-b77c-4b2b55518ba6)
