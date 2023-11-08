@@ -12,7 +12,7 @@ def progress_callback(stream, chunk, bytes_remaining):
     logger.info(
         f"Downloaded: {bytes_downloaded} / {total_size} bytes ({percentage_complete:.2f}%)")
 
-def downlonYoutubeVideo(url):
+def downloadYoutubeVideo(url):
     video = YouTube(url, on_progress_callback=progress_callback)
     video_id = video.video_id
     logger.info(f"Downloading video {video_id}")
