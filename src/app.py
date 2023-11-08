@@ -2,6 +2,7 @@ from services.videoDownloadService import downloadYoutubeVideo
 import subprocess
 import os
 from services.loggerServices import setup_logger
+import whisper
 
 logger = setup_logger("processVideoService")
 url = 'https://www.youtube.com/watch?v=GC80Dk7eg_A'
@@ -40,3 +41,9 @@ def processVideo():
     
 processVideo();
 
+
+
+def createSubtitles(audioFilePath):
+    model = whisper.load_model("base")
+    result = model.transcribe(audioFilePath)
+    return (result["text"])
